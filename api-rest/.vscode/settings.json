@@ -1,0 +1,30 @@
+{
+    "actionButtons": {
+        "commands": [            
+            {
+                "name": "$(refresh) Reload Window",
+                "color": "#2cfff7",
+                "command": "workbench.action.reloadWindow",                
+                "useVsCodeApi": true,
+            },
+            {
+                "cwd": "${workspaceFolder}",
+                "name": "$(triangle-right) Cargo Run",
+                "color": "#46b800",
+                "singleInstance": true,
+                "command": "cargo run",
+                //"args": ["-- src/data.json"]
+            },
+            
+            {
+                "cwd": "${workspaceFolder}",
+                "name": "$(run-coverage) Cargo Build",
+                "color": "#d7bcff",
+                "singleInstance": true,
+                "command": "cargo build",
+                //"args": ["-- src/data.json"]
+            },
+            
+        ]
+    }
+}
