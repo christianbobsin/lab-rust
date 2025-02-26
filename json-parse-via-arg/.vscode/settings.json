@@ -1,0 +1,22 @@
+{
+    "actionButtons": {
+        "commands": [            
+            {
+                "name": "$(refresh) Reload Window",
+                "color": "#2cfff7",
+                "command": "workbench.action.reloadWindow",                
+                "useVsCodeApi": true,
+            },
+            {
+                "cwd": "${workspaceFolder}",
+                "name": "$(triangle-right) Cargo Run",
+                "color": "green",
+                "singleInstance": true,
+                "command": "cargo run",
+                "args": ["-- src/data.json"]
+            },
+            
+            
+        ]
+    }
+}

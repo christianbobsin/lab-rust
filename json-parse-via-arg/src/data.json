@@ -1,0 +1,28 @@
+[
+    {
+        "key1": "Christian",
+        "key2": "Developer",
+        "key3": {
+            "key4": 23,
+            "key5": "Azul",
+            "key6": [23.5, 45.2, 67.9]
+        }
+    },
+    {
+        "key1": "Alice",
+        "key2": "Designer",
+        "key3": {
+            "key4": 45,
+            "key5": "Vermelho"            
+        }
+    },
+    {
+        "key1": "Bob",
+        "key2": "Manager",
+        "key3": {
+            "key4": 67,
+            "key5": "Verde",
+            "key6": [8.8, 22.5, 33.1]
+        }
+    }
+]

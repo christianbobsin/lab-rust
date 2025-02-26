@@ -1,0 +1,22 @@
+# Binários e artefatos de compilação
+**/target/
+**/debug/
+**/release/
+**/*.rs.bk
+
+# Arquivos gerados pelo Cargo
+**/Cargo.lock
+**/.cargo/
+
+# Diretórios do Rustup e ferramentas
+**/.rustup/
+**/.rustc_info.json
+
+# Arquivos de IDEs e editores
+**/.idea/
+**/*.iml
+
+# Dumps e logs
+**/core
+**/*.log
+**/*.tmp
