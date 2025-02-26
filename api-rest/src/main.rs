@@ -1,8 +1,12 @@
-use reqwest::header::{HeaderMap, HeaderValue, CONTENT_TYPE};
-use serde_json::json;
-use serde::Deserialize;
+use std::fs::File;
+use std::io::Write;
 
-#[derive(Debug, Deserialize)]
+use reqwest::header::{HeaderMap, HeaderValue, CONTENT_TYPE};
+use serde_json::{json, to_string_pretty};
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "PascalCase")]
 #[allow(dead_code)]
 struct AuthenticationResult {
     access_token: String,    
@@ -12,14 +16,16 @@ struct AuthenticationResult {
     token_type: String    
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "PascalCase")] // Define que os campos do JSON estão em PascalCase
 #[allow(dead_code)]
 struct ChallengeParameters {
     challenge_name: Option<String>,
     challenge_parameters: Option<String>
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "PascalCase")]
 #[allow(dead_code)]
 struct ResultData {
     authentication_result: AuthenticationResult,
@@ -57,15 +63,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .headers(headers) // Adiciona os cabeçalhos da requisição
         .json(&body)      // Adiciona o corpo da requisição
         .send()           // Envia a requisição
-        .await?;          // Aguarda a resposta do servidor
+        .await?; // Aguarda a resposta do servidor
     
-    // Verifica se a requisição retornou um status de erro
     let response_text = response.text().await?;
     
-    // Faz o parse do JSON retornado pelo servidor
     let result_data: ResultData = serde_json::from_str(&response_text).expect("Erro ao fazer parse do JSON");
 
     println!("BeraerToken: {}", result_data.authentication_result.id_token);
+
+
+    // Serializa result_data para uma string JSON
+    let json_string = to_string_pretty(&result_data)?;
+
+    // Salva a string JSON em um arquivo
+    let mut file = File::create("result_data.json")?;
+    file.write_all(json_string.as_bytes())?;
 
     //let response_text = response.text().await?;
     //println!("Resposta: {}", response_text);
